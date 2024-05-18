@@ -1,0 +1,82 @@
+---
+import Item from "./Item.astro";
+import drink1 from "../images/common/drink1.jpg";
+import drink2 from "../images/common/drink2.jpg";
+import drink3 from "../images/common/drink3.jpg";
+import drink4 from "../images/common/drink4.jpg";
+import drink5 from "../images/common/drink5.jpg";
+import drink6 from "../images/common/drink6.jpg";
+import drink7 from "../images/common/drink7.jpg";
+import drink8 from "../images/common/drink8.jpg";
+const drinkItems = [
+  {
+    drinkImg: drink1,
+    drinkTitle: "ホットコーヒー",
+    drinkText: "400",
+  },
+  {
+    drinkImg: drink2,
+    drinkTitle: "カフェラテ",
+    drinkText: "490",
+  },
+  {
+    drinkImg: drink3,
+    drinkTitle: "抹茶ラテ",
+    drinkText: "500",
+  },
+  {
+    drinkImg: drink4,
+    drinkTitle: "カフェモカ",
+    drinkText: "530",
+  },
+  {
+    drinkImg: drink5,
+    drinkTitle: "カプチーノ",
+    drinkText: "550",
+  },
+  {
+    drinkImg: drink6,
+    drinkTitle: "キャラメルマキアート",
+    drinkText: "490",
+  },
+  {
+    drinkImg: drink7,
+    drinkTitle: "エスプレッソ",
+    drinkText: "550",
+  },
+  {
+    drinkImg: drink8,
+    drinkTitle: "紅茶",
+    drinkText: "450",
+  },
+];
+
+---
+
+<div class="p-items">
+  {
+    drinkItems.map((drinkItem) => (
+      <article class="p-items__item">
+        <Item
+          img={drinkItem.drinkImg}
+          title={drinkItem.drinkTitle}
+          text={drinkItem.drinkText}
+        />
+      </article>
+    ))
+  }
+</div>
+
+<style lang="scss">
+  @use "../sass/global" as *;
+  .p-items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: rem(60);
+
+    @include mq(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: rem(25);
+    }
+  }
+</style>

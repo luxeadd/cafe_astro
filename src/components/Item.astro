@@ -1,0 +1,87 @@
+---
+import Picture from "../common/Picture.astro";
+const { img, title, text } = Astro.props;
+---
+
+<a href="" class="c-item">
+  <figure class="c-item__img">
+    <Picture
+      imgSrc={img}
+      imgSrcSP={img}
+      width="265"
+      height="265"
+      widthSP="160"
+      heightSP="160"
+      alt=""
+    />
+  </figure>
+  <div class="c-item__block">
+    <div class="c-item__inner">
+      <h3 class="c-item__title">{title}</h3>
+      <p class="c-item__text">￥{text} (+tax)</p>
+    </div>
+  </div>
+</a>
+
+<style lang="scss">
+  @use "../sass/global" as *;
+
+  .c-item {
+    display: block;
+    aspect-ratio: 1 / 1;
+    position: relative;
+
+    @media (hover: hover) {
+      &:hover {
+        .c-item__block {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .c-item__img {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .c-item__block {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background-color: color-mix(in srgb, #211b12 60%, transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+
+    @include mq(md) {
+      opacity: 1;
+      background: linear-gradient(
+        to bottom,
+        color-mix(in srgb, #211b12 0%, transparent) 51%,
+        color-mix(in srgb, #211b12 59%, transparent) 82%,
+      );
+    }
+  }
+
+  .c-item__title {
+    font-size: rem(20);
+    font-weight: var(--medium);
+    color: white;
+    text-align: center;
+  }
+
+  .c-item__text {
+    font-size: rem(16);
+    font-weight: var(--medium);
+    color: white;
+    text-align: center;
+  }
+</style>

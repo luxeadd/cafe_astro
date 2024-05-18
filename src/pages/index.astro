@@ -1,0 +1,33 @@
+---
+const page = "top";
+const path = "./";
+import Layout from "../layouts/Layout.astro";
+import Picture from "../common/Picture.astro";
+import Items from "../components/Items.astro";
+
+---
+
+<Layout page={page} path={path} title="TOP" desc="トップページの説明です">
+  <div class="l-inner">
+    <Items />
+  </div>
+</Layout>
+
+<style lang="scss">
+  @use "../sass/global" as *;
+  .mv {
+    width: 100%;
+  }
+  .img {
+    width: 100%;
+    max-width: rem(200);
+  }
+  .image {
+    width: 100%;
+    max-width: rem(500);
+  }
+  .image2 {
+    width: 100%;
+    max-width: rem(500);
+  }
+</style>

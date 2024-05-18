@@ -1,0 +1,51 @@
+@use "sass:math";
+
+// インナー幅設定
+$inner: 1240px;
+:root {
+  --inner: 1240px;
+  // 余白
+  --padding-pc: 25px;
+  --padding-sp: 15px;
+  // フォント
+  --base-font-family: "Shippori Mincho", serif;
+  // フォントウェイト
+  --light: 300;
+  --normal: 400;
+  --medium: 500;
+  --semi-bold: 600;
+  --bold: 700;
+  --ex-bold: 800;
+  // カラー
+  --base-color: #333333;
+  --base-background: #fff;
+  --white: #fff;
+  --black: #35322B;
+  --gray: #444444;
+  --brown: #4C360A;
+  --brown-light: #6B5019;
+  --beige: #D6CBB6;
+  --beige-light: #ECE8E1;
+  --white1: #F7F5F1;
+  --white2: #F8F6F3;
+  // z-index
+  --hamburger-color2: #fff;
+  --header: 100;
+  --hamburger: 103;
+  --drawer: 102;
+  --drawer-back: 101;
+  --page-top: 99;
+  // header高さ
+  --header-height: 154;
+  --header-heightSP: 113;
+}
+
+
+body {
+  font-family: var(--base-font-family);
+  font-weight: var(--normal);
+  color: var(--base-color);
+  background: var(--base-background);
+  line-height: 1.5;
+}
+

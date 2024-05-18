@@ -1,0 +1,504 @@
+---
+const { page } = Astro.props;
+const { path } = Astro.props;
+import Picture from "../common/Picture.astro";
+const logo = "/assets/images/common/logo.svg";
+---
+
+<header class="l-header p-header js-header" data-fixed-header>
+  <div class="p-header__inner">
+    <!-- ヘッダーロゴ -->
+    {
+      page === "top" ? (
+        <h1 class="p-header__logo">
+          <a href="/">
+            <img src={logo} alt="CodeUps Cafe" />
+          </a>
+        </h1>
+      ) : (
+        <div class="p-header__logo">
+          <img src={logo} alt="CodeUps Cafe" />
+        </div>
+      )
+    }
+    <!-- ドロワーアイコン  -->
+    <div class="p-header__drawerBtn">
+      <button
+        type="button"
+        class="c-hamburger js-hamburger"
+        aria-controls="drawer_menu"
+        aria-expanded="false"
+        area-label="メニューを開閉する"
+      >
+        <span class="c-hamburger__line"></span>
+      </button>
+    </div>
+    <!-- pcーメニュー -->
+    <nav class="p-header__pc-menu p-header-menu">
+      <ul class="p-header-menu__items">
+        <li class="p-header-menu__item p-header-menu__item--subMenu">
+          企業情報
+          <ul class="p-header-menu__subItems">
+            <li class="p-header-menu__subItem">
+              <a href="">私たちについて</a>
+            </li>
+            <li class="p-header-menu__subItem"><a href="">会社概要</a></li>
+            <li class="p-header-menu__subItem"><a href="">代表挨拶</a></li>
+            <li class="p-header-menu__subItem"><a href="">組織体制</a></li>
+            <li class="p-header-menu__subItem"><a href="">役員紹介</a></li>
+            <li class="p-header-menu__subItem"><a href="">沿革</a></li>
+          </ul>
+        </li>
+        <li class="p-header-menu__item"><a href="#sec1">事業紹介</a></li>
+        <li class="p-header-menu__item">
+          <a href="#sec2">サステナビリティ</a>
+        </li>
+        <li class="p-header-menu__item"><a href="#sec3">お知らせ</a></li>
+        <li class="p-header-menu__item"><a href="#sec4">採用情報</a></li>
+        <li class="p-header-menu__btn">
+          <a href="#sec5" class="c-btn c-btn--mail">お問い合わせ</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- ドロワーメニュー -->
+    <nav
+      class="p-header__drawer-menu p-drawer-menu js-drawer-menu"
+      id="drawer_menu"
+      area-hidden="true"
+    >
+      <ul class="p-drawer-menu__items">
+        <li id="js-drawer-menu__item" class="p-drawer-menu__item">
+          <a href="">企業情報</a>
+        </li>
+        <li id="js-drawer-menu__item" class="p-drawer-menu__item">
+          <a href="">事業紹介</a>
+        </li>
+        <li id="js-drawer-menu__item" class="p-drawer-menu__item">
+          <a href="">サステナビリティ</a>
+        </li>
+        <li id="js-drawer-menu__item" class="p-drawer-menu__item">
+          <a href="">お知らせ</a>
+        </li>
+        <li id="js-drawer-menu__item" class="p-drawer-menu__item">
+          <a href="">採用情報</a>
+        </li>
+        <li id="js-drawer-menu__item" class="p-drawer-menu__item">
+          <a href="">お問い合わせ</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style lang="scss">
+  @use "../sass/global" as *;
+  .p-header {
+    height: rem(154);
+    background: var(--white);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: var(--header);
+    display: flex;
+
+    @include mq(md) {
+      height: rem(113);
+    }
+
+    @media print {
+      position: absolute;
+    }
+
+    &.is_active {
+      background: #ccc;
+    }
+  }
+
+  .p-header__inner {
+    display: flex;
+    gap: rem(20);
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-inline: rem(50) rem(50);
+    height: auto;
+
+    @include mq(md) {
+      padding-inline: rem(15) 0;
+    }
+  }
+
+  .p-header__logo {
+    width: rem(114);
+    height: initial;
+    display: flex;
+    align-items: center;
+
+    a {
+      width: 100%;
+      display: block;
+    }
+
+    @include mq(md) {
+      width: rem(87);
+    }
+  }
+
+  .p-header__logo img {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .p-header__drawerBtn {
+    display: none;
+    @include mq(md) {
+      display: grid;
+      place-content: center;
+      z-index: var(--hambuger);
+      position: relative;
+      align-self: flex-start;
+    }
+  }
+
+  .p-header__drawer-menu {
+  }
+
+  .p-header__menu {
+  }
+
+  .p-header-menu {
+    display: flex;
+    align-items: center;
+
+    @include mq(md) {
+      display: none;
+    }
+  }
+
+  .p-header-menu__items {
+    display: flex;
+    align-items: center;
+    gap: rem(50);
+    height: 100%;
+  }
+
+  .p-header-menu__item {
+    font-size: rem(16);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: rem(8);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--base-color);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      transition: all 0.5s ease;
+      opacity: 0;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: rem(9);
+    }
+
+    a[target="_blank"]::after {
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        &::after {
+          opacity: 1;
+          transform: translate(-50%, -300%);
+        }
+      }
+    }
+  }
+
+  .p-header-menu__btn {
+    font-size: rem(16);
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .p-header-menu__item--subMenu {
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover .p-header-menu__subItems {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  .p-header-menu__subItems {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    width: fit-content;
+    padding: rem(30) rem(40);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: rem(20);
+    background: var(--white);
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .p-header-menu__subItem {
+    font-size: rem(13);
+    padding-left: rem(16);
+    position: relative;
+    width: rem(170);
+    transition: padding-left 0.3s ease;
+
+    &::before {
+      content: "";
+      display: block;
+      width: rem(8);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(#ccc, 0.7);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+      z-index: 2;
+      transition: background 0.3s ease;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        padding-left: rem(20);
+        &::before {
+          background: var(--base-color);
+        }
+      }
+    }
+  }
+
+  .p-drawer-menu {
+    display: none;
+
+    @include mq(md) {
+      display: block;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      height: 100svh;
+      overflow-y: scroll;
+      z-index: var(--drawer);
+      background-color: color-mix(in srgb, #ccc 50%, transparent);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        background 0.3s ease;
+    }
+  }
+
+  .p-drawer-menu[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .p-drawer-menu__items {
+    height: initial;
+    display: block;
+    padding-block: rem(135) rem(100);
+    padding-inline: var(--padding-sp);
+    width: 100%;
+    margin-inline: auto;
+
+    @include mq(md) {
+      padding-block: rem(50) rem(100);
+      padding-inline: var(--padding-sp);
+    }
+  }
+
+  .p-drawer-menu__item {
+    border-bottom: 1px solid var(--white);
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: rem(10);
+      min-height: rem(80);
+      text-align: center;
+      font-size: rem(28);
+      line-height: calc(40 / 28);
+      transition: opacity 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: rem(20);
+      text-align: left;
+
+      @include mq(md) {
+        font-size: rem(18);
+        line-height: calc(26 / 18);
+        min-height: rem(60);
+      }
+
+      &::before {
+        content: "";
+        display: block;
+        width: rem(20);
+        flex: 0 0 rem(20);
+        height: rem(29);
+        background: var(--base-color);
+        clip-path: polygon(0 0, 0% 100%, 100% 50%);
+
+        @include mq(md) {
+          width: rem(12);
+          flex: 0 0 rem(12);
+          height: rem(17);
+        }
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  .p-drawer-menu__bottom {
+    a {
+      display: block;
+      min-height: rem(80);
+      font-size: rem(22);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      text-align: left;
+      padding: rem(10) 0;
+      transition: opacity 0.3s ease;
+
+      @include mq(md) {
+        min-height: rem(60);
+        font-size: rem(14);
+      }
+
+      @media (hover: hover) {
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  $hamburger-color1: var(--white); //通常時ボタンカラー
+  $hamburger-color2: var(--white); //展開時ボランカラー
+
+  .c-hamburger {
+    @include mq(md) {
+      display: inline-block;
+      border: none;
+      background: var();
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: relative;
+      width: rem(60);
+      height: rem(60);
+    }
+  }
+
+  @media (hover: hover) {
+    .c-hamburger:hover {
+      background: var(--base-color);
+
+      .c-hamburger__line {
+        background: $hamburger-color2;
+      }
+      &[aria-expanded="true"] {
+        .c-hamburger__line {
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  .c-hamburger__line {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: rem(20);
+    height: 1px;
+    background: $hamburger-color1;
+    transition: background 0.3s ease;
+  }
+
+  .c-hamburger__line::before,
+  .c-hamburger__line::after {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    content: "";
+    transition: transform 0.3s ease;
+  }
+
+  .c-hamburger__line::before {
+    top: rem(-6);
+  }
+  .c-hamburger__line::after {
+    top: rem(6);
+  }
+  .c-hamburger[aria-expanded="true"] {
+    background: var(--base-color);
+
+    .c-hamburger__line {
+      background: transparent;
+
+      &::before,
+      &::after {
+        top: 0;
+        background: $hamburger-color2;
+      }
+    }
+    .c-hamburger__line::before {
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    .c-hamburger__line::after {
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+</style>
